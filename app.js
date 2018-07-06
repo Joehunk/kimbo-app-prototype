@@ -17,17 +17,45 @@
 
 // [START app]
 const express = require('express');
+const fileUpload = require('express-fileupload');
+const vision = require('@google-cloud/vision');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello, world 2!').end();
+const client = new vision.ImageAnnotatorClient();
+
+app.use(fileUpload());
+app.use(express.static('www'));
+
+app.post('/upload_ingredients', function(req, res) {
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.');
+
+    let ingredients = req.files.ingredients;
+
+    const request = {
+        image: {
+            content: ingredients.data
+        }
+    };
+    client
+        .textDetection(request)
+        .then(results => {
+            const labels = results[0].textAnnotations;
+
+            console.log('Labels:');
+            labels.forEach(label => console.log(label.description));
+            res.status(200).send(labels.map(l => l.description).join(" -- "))
+        })
+        .catch(err => {
+            console.error('ERROR:', err);
+        });
 });
 
 // Start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
 });
 // [END app]
