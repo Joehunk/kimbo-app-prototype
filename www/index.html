@@ -1,15 +1,30 @@
 <html>
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
     <title>Kimbo App Prototype</title>
 </head>
 <body>
-<p style="font-size:3.5vw;">Take a picture of an ingredient list and post it here. It often picks up other
-text after the ingredients...still working on that. Also it's ugly...it's why they only let me do back end.</p>
-<p style="font-size:3.5vw;"><a href="https://github.com/Joehunk/kimbo-app-prototype">Source code is here</a>
-    (lots of explanation in the README).</p>
+<p>This is a prototype/playground for the super-secret app. It uses the <a href="https://cloud.google.com/vision/">Google Cloud Vision API</a>
+to extract text from images, then parses them into ingredient lists. It only works with food so far, and still has issues
+figuring out where the ingredients end sometimes.</p>
+<p>Take a picture of an ingredient list (only food works so far) and post it here.</p>
+<p><a href="https://github.com/Joehunk/kimbo-app-prototype">Source code is here</a>
+    (README explains lots of stuff).</p>
 <form action="/upload_ingredients" method="POST" encType="multipart/form-data">
-    <input style="font-size:3.5vw;" name="ingredients" type="file"/>
-    <input style="font-size:3.5vw;" name="OK" type="submit" />
+    <input name="ingredients" type="file"/>
+    <input name="OK" type="submit" />
 </form>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html>
